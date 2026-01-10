@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Archives</title>
+
+<style>
+    /* ===== Base Layout ===== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/010/563/727/small/swimming-pool-top-view-olympic-pool-swimming-paths-dip-pool-top-view-vector.jpg');
+  margin: 0;
+  padding: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ===== Main Container ===== */
+.container {
+  background: white;
+  width: 100%;
+  max-width: 900px;
+  padding: 16px;
+  border-radius: 8px;
+  border: 2px solid black;
+  margin-top: 16px;
+}
+
+/* ===== Headings ===== */
+h1 {
+  text-align: center;
+  margin: 10px 0 16px;
+}
+
+/* ===== Buttons ===== */
+button {
+  padding: 10px 16px;
+  background: black;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: none;
+  margin: 4px;
+  white-space: nowrap;
+}
+
+button:hover {
+  background-color: #494949;
+}
+
+/* ===== Controls & Filters ===== */
+.controls,
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+select {
+  padding: 6px;
+  font-size: 14px;
+}
+
+/* ===== Trend Text ===== */
+#trendAnalysis {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ===== Table Wrapper (Mobile Scroll Fix) ===== */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* ===== Table ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  min-width: 600px; /* enables horizontal scroll on phones */
+}
+
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+}
+
+th {
+  cursor: pointer;
+  background-color: #f5f5f5;
+}
+
+/* ===== Chart Modal ===== */
+#chartModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+#chartModalContent {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 600px;
+}
+
+/* ===== Responsive Tweaks ===== */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  th,
+  td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  button {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+}
+
+</style>
+
+<!-- Chart.js -->
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+
+</head>
+
+<body>
+
+<button class="backButton" onclick="goBack()">Back to Archives</button>
+
+<div class="container">
+    <h1 id="eventTitle">Event</h1>
+    <!-- Year Filter -->
+    <div style="text-align:center; margin:10px 0;">
+       <label for="yearFilter"><b>Filter by Year:</b></label>
+       <select id="yearFilter" style="padding:5px; font-size:14px;">
+        <!-- JS will auto-fill -->
+       </select>
+    </div>
+
+
+    <!-- Sorting and export -->
+    <div style="text-align:center; margin-top:10px;">
+        <button class="exportButton" onclick="exportCSV()">Export CSV</button>
+    </div>
+
+    <!-- Trend -->
+    <div id="trendAnalysis"></div>
+    <!-- Graph Buttons -->
+    <div style="margin-bottom: 15px; text-align:center;">
+      
+      <button onclick="showChart('bar')">Date Graph</button>
+      <button onclick="showChart('happiness')">Happiness Graph</button>
+    </div>
+
+
+
+    <table>
+        <thead>
+          <tr>
+            <th onclick="sortTable('date')" style="cursor:pointer;">Date</th>
+            <th onclick="sortTable('time')" style="cursor:pointer;">Time</th>
+            <th onclick="sortTable('happiness')" style="cursor:pointer;">Happiness</th>
+            <th>Comments</th>
+            <th>Actions</th>
+          </tr>
+       </thead>
+
+        <tbody id="eventTable">
+            <!-- JS fills entries -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Chart Modal -->
+<div id="chartModal">
+    <div id="chartModalContent">
+        <canvas id="eventChart"></canvas>
+        <div style="text-align:center; margin-top:10px;">
+            <button class="actionButton" onclick="closeChart()">Close</button>
+        </div>
+    </div>
+</div>
+
+<script src="event.js"></script>
+</body>
+</html>
+
+

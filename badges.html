@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Badges</title>
+<style>
+    body {
+    background-image: url('https://static.vecteezy.com/system/resources/thumbnails/010/563/727/small/swimming-pool-top-view-olympic-pool-swimming-paths-dip-pool-top-view-vector.jpg');
+    font-family: Helvetica;
+    margin: 0;
+    color: black;
+    padding-top: 80px; /* space for fixed nav */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* ---------- NAV ---------- */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    z-index: 1000;
+}
+
+nav button {
+    background: white;
+    color: #007acc;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+nav button:hover {
+    background: #e0e0e0;
+}
+
+/* ---------- HEADERS ---------- */
+h1 {
+    margin: 20px 0 10px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- BADGE GRID ---------- */
+.badge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    width: 90%;
+    max-width: 1000px;
+    margin-bottom: 40px;
+}
+
+/* ---------- BADGE CARD ---------- */
+.badge {
+    aspect-ratio: 1 / 1; /* keeps square on all screens */
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+    background-color: gold;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* ---------- BADGE STATES ---------- */
+.badge.unearned {
+    opacity: 0.5;
+    background-color: gray;
+}
+
+.badge.earned {
+    background-color: gold;
+    animation: pop 0.5s ease;
+}
+
+/* ---------- BADGE IMAGE ---------- */
+.badge img {
+    width: 60%;
+    max-width: 90px;
+    height: auto;
+    margin-bottom: 8px;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes pop {
+    0% { transform: scale(0.8); box-shadow: 0 0 0 gold; }
+    70% { transform: scale(1.1); box-shadow: 0 0 15px gold; }
+    100% { transform: scale(1); box-shadow: 0 0 10px gold; }
+}
+
+/* ---------- MOBILE TWEAKS ---------- */
+@media (max-width: 480px) {
+    nav button {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .badge {
+        font-size: 12px;
+    }
+}
+</style>
+</head>
+<body>
+    <nav>
+      <button onclick="window.location.href='badges.html'">Badges</button>
+      <button onclick="window.location.href='ArchivesLC.html'">Archives LC</button>
+      <button onclick="window.location.href='PB.html'">Personal Best's</button>
+      <button onclick="window.location.href='inputtimes.html'">Input times</button>
+      <button onclick="window.location.href='logOUT.html'">Log Out</button>
+      
+  </nav>
+<h1>Your Badges</h1>
+
+
+<a href="PB.html"><i>Back to Personal Bests</i></a>
+
+
+<div class="badge-grid" id="badgeGrid">
+    <!-- Badges will be dynamically inserted here -->
+</div>
+
+
+<script src="badges.js"></script>
+</body>
+</html>

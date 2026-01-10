@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Personal Bests</title>
+<style>
+    /* ===== Global Reset ===== */
+* {
+  box-sizing: border-box;
+}
+
+/* ===== Page Layout ===== */
+body {
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/010/563/727/small/swimming-pool-top-view-olympic-pool-swimming-paths-dip-pool-top-view-vector.jpg');
+  margin: 0;
+  padding: 90px 16px 16px; /* 👈 space for fixed nav */
+  font-family: Helvetica, Arial, sans-serif;
+  color: black;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* ===== Navigation ===== */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+    z-index: 1000;
+}
+
+nav button {
+    background: white;
+    color: #007acc;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+nav button:hover {
+    background: #e0e0e0;
+}
+
+/* ===== Headings ===== */
+h1 {
+  margin: 20px 0;
+  text-align: center;
+}
+
+/* ===== Table Container ===== */
+.table-container {
+  background-color: white;
+  width: 100%;
+  max-width: 1000px;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ===== Filters ===== */
+label {
+  font-weight: bold;
+}
+
+select {
+  padding: 6px;
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+/* ===== Table Wrapper (Mobile Fix) ===== */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 12px;
+}
+
+/* ===== Table ===== */
+#pbTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 700px; /* enables horizontal scroll on small screens */
+}
+
+#pbTable th,
+#pbTable td {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+#pbTable th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+#pbTable th.sortable:hover {
+  background-color: #e6f7ff;
+}
+
+#pbTable th.sorted-asc::after {
+  content: " ▲";
+}
+
+#pbTable th.sorted-desc::after {
+  content: " ▼";
+}
+
+#pbTable tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+#pbTable tr:hover {
+  background-color: #e6f7ff;
+}
+
+/* ===== Buttons ===== */
+button,
+#exportCSV {
+  margin-top: 12px;
+  padding: 10px 18px;
+  font-size: 14px;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover,
+#exportCSV:hover {
+  background-color: #494949;
+}
+
+/* ===== Chart Container ===== */
+#chartContainer {
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 24px;
+  background-color: white;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Make chart responsive */
+canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* ===== Modal ===== */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: rgba(0,0,0,0.5);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+#closeModal {
+  float: right;
+  font-size: 26px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#closeModal:hover {
+  color: red;
+}
+
+#modalCommentText {
+  white-space: pre-wrap;
+  text-align: left;
+  margin-top: 15px;
+  line-height: 1.5;
+}
+
+#editCommentBtn {
+  margin-top: 15px;
+  padding: 8px 14px;
+  border: none;
+  background-color: #007acc;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+#editCommentBtn:hover {
+  background-color: #005fa3;
+}
+
+/* ===== Mobile Tweaks ===== */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  nav button {
+    font-size: 13px;
+    padding: 6px 10px;
+  }
+
+  #pbTable th,
+  #pbTable td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  button {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+}
+
+
+</style>
+</head>
+<body>
+    <nav>
+      <button onclick="window.location.href='badges.html'">Badges</button>
+      <button onclick="window.location.href='ArchivesLC.html'">Archives LC</button>
+      <button onclick="window.location.href='inputtimes.html'">Input Times</button>
+      <button onclick="window.location.href='logOUT.html'">Log Out</button>
+    </nav>
+
+<h1><span id="usernameDisplay"></span></h1>
+
+<div class="table-container">
+<label for="courseFilter">Course:</label>
+<select id="courseFilter" onchange="setCourse(this.value)">
+    <option value="LC">Long Course (LC)</option>
+    <option value="SC">Short Course (SC)</option>
+</select>
+<p>Click the table headers to sort personal bests.</p>
+<table id="pbTable">
+  <thead>
+    <tr>
+      <th class="sortable" data-sort="event" onclick="setSort('event')">Event</th>
+      <th class="sortable" data-sort="time" onclick="setSort('time')">Time</th>
+      <th class="sortable" data-sort="date" onclick="setSort('date')">Date</th>
+      <th class="sortable" data-sort="happiness" onclick="setSort('happiness')">Happiness</th>
+      <th>Comments</th>
+      <th>Actions</th>
+
+    </tr>
+  </thead>
+  <tbody id="pbTableBody">
+    
+  </tbody>
+</table>
+
+<button id="exportCSV">Export CSV</button>
+</div>
+<div id="chartContainer">
+    <label for="chartType">Chart Type:</label>
+    <select id="chartType" onchange="renderSelectedChart()">
+        <option value="time">Time Chart</option>
+        <option value="happiness">Happiness Chart</option>
+        <option value="date">Date Chart</option>
+    </select>
+
+    <canvas id="pbChart" width="900" height="400"></canvas>
+</div>
+
+
+
+// chart.js
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Your PB.js script -->
+<script src="PB.js"></script>
+
+<script>
+  
+  const username = localStorage.getItem("username") || "Guest";
+  document.getElementById("usernameDisplay").textContent = username;
+</script>
+
+<div id="commentModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal">&times;</span>
+    <h3>Comments</h3>
+
+    <p id="modalCommentText"></p>
+
+    <button id="editCommentBtn">Edit Comment</button>
+  </div>
+</div>
+
+
+</body>
+</html>
