@@ -6,7 +6,7 @@
 <title>Event Archives</title>
 
 <style>
-    /* ===== Base Layout ===== */
+/* ===== Base Layout ===== */
 * {
   box-sizing: border-box;
 }
@@ -144,6 +144,7 @@ th {
   }
 }
 
+
 </style>
 
 <!-- Chart.js -->
@@ -183,8 +184,7 @@ th {
     </div>
 
 
-
-    <table>
+    <div class="table-wrapper">
         <thead>
           <tr>
             <th onclick="sortTable('date')" style="cursor:pointer;">Date</th>
@@ -199,6 +199,8 @@ th {
             <!-- JS fills entries -->
         </tbody>
     </table>
+    </div>
+    
 </div>
 
 <!-- Chart Modal -->
@@ -214,5 +216,6 @@ th {
 <script src="event.js"></script>
 </body>
 </html>
+
 
 
