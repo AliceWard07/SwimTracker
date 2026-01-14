@@ -3,31 +3,28 @@
 <head>
   <style>
 body {
-      background-image: url('https://static.vecteezy.com/system/resources/thumbnails/010/563/727/small/swimming-pool-top-view-olympic-pool-swimming-paths-dip-pool-top-view-vector.jpg');
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      color: black;
-      font-family: Helvetica;
-    }
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/010/563/727/small/swimming-pool-top-view-olympic-pool-swimming-paths-dip-pool-top-view-vector.jpg');
+  margin: 0;
+  font-family: Helvetica;
+  color: black;
 
-    .inputting_container {
-      position: absolute;
-      width: 1000px;
-      height: 1000px;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;          
-      margin: auto;
-      background-color: rgb(175, 224, 255);
-      border: 2px solid black;
-      border-radius: 8px;
-      padding: 30px 40px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+  .inputting_container {
+  width: 70%;
+  max-width: 1000px;
+  background-color: rgb(175, 224, 255);
+  border: 2px solid black;
+  border-radius: 8px;
+  padding: 30px 40px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+
 
     input, select {
       width: 100%;
@@ -53,26 +50,26 @@ body {
     }
 
     .box {
-      align-self: center;
-      display: flex;
-      height: 80%;
-      width: 90%;
-      background-color: white;
-      margin-bottom: -60px;
-    }
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
 
 nav {
-       position: fixed;
-       top: 0;
-       left: 0;
-       width: 100%;
-       background-color: rgba(0, 0, 0, 0.8);
-       display: flex;
-       justify-content: center;
-       padding: 10px 0;
-       z-index: 1000;
-       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-   }
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
 
 
     nav button {
@@ -180,3 +177,4 @@ nav {
   <script src="inputtimes.js"></script>
 </body>
 </html>
+
