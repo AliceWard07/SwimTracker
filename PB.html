@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Personal Bests</title>
 <style>
-    /* ===== Global Reset ===== */
+/* ===== Global Reset ===== */
 * {
   box-sizing: border-box;
 }
@@ -14,7 +14,7 @@
 body {
   background-image: url('https://static.vecteezy.com/system/resources/thumbnails/010/563/727/small/swimming-pool-top-view-olympic-pool-swimming-paths-dip-pool-top-view-vector.jpg');
   margin: 0;
-  padding: 90px 16px 16px; /* 👈 space for fixed nav */
+  padding: 16px;
   font-family: Helvetica, Arial, sans-serif;
   color: black;
 
@@ -23,36 +23,31 @@ body {
   align-items: center;
 }
 
-
 /* ===== Navigation ===== */
 nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.85);
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 10px;
-    z-index: 1000;
+  width: 100%;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
 }
 
 nav button {
-    background: white;
-    color: #007acc;
-    border: none;
-    padding: 8px 14px;
-    cursor: pointer;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 14px;
-    transition: 0.2s;
+  background: white;
+  color: #007acc;
+  border: none;
+  padding: 8px 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.2s;
 }
 
 nav button:hover {
-    background: #e0e0e0;
+  background: #e0e0e0;
 }
 
 /* ===== Headings ===== */
@@ -245,6 +240,7 @@ canvas {
 }
 
 
+
 </style>
 </head>
 <body>
@@ -264,6 +260,7 @@ canvas {
     <option value="SC">Short Course (SC)</option>
 </select>
 <p>Click the table headers to sort personal bests.</p>
+<div class="table-wrapper">
 <table id="pbTable">
   <thead>
     <tr>
@@ -280,7 +277,7 @@ canvas {
     
   </tbody>
 </table>
-
+</div>
 <button id="exportCSV">Export CSV</button>
 </div>
 <div id="chartContainer">
@@ -321,3 +318,4 @@ canvas {
 
 </body>
 </html>
+
